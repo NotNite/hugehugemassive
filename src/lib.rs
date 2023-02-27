@@ -10,6 +10,8 @@ use hcloud::{
 };
 use std::collections::HashMap;
 
+pub use hcloud;
+
 #[derive(thiserror::Error, Debug)]
 pub enum Error {
     #[error("server not found")]
