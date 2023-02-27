@@ -1,0 +1,13 @@
+[package]
+name = "hugehugemassive"
+description = "bigbiglarge as a rust library"
+authors = ["NotNite <hi@notnite.com>"]
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+hcloud = { version = "0.13.0" }
+thiserror = "1.0.38"
+
+[dev-dependencies]
+tokio = { version = "1.25.0", features = ["full"] }
