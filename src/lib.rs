@@ -18,7 +18,7 @@ pub enum Error {
     ServerNotFound,
 
     #[error("hetzner API error")]
-    HetznerApi,
+    HetznerApi(Box<dyn std::error::Error>),
 }
 
 #[derive(Debug, Clone)]
@@ -51,7 +51,7 @@ impl Hetzner {
 
         let resp = create_server(&self.configuration, params)
             .await
-            .map_err(|_| Error::HetznerApi)?;
+            .map_err(|e| Error::HetznerApi(Box::new(e)))?;
         Ok(*resp.server)
     }
 
@@ -62,7 +62,7 @@ impl Hetzner {
 
         let resp = list_servers(&self.configuration, params)
             .await
-            .map_err(|_| Error::HetznerApi)?;
+            .map_err(|e| Error::HetznerApi(Box::new(e)))?;
 
         Ok(resp.servers)
     }
@@ -71,7 +71,7 @@ impl Hetzner {
         let params = DeleteServerParams { id };
         delete_server(&self.configuration, params)
             .await
-            .map_err(|_| Error::HetznerApi)?;
+            .map_err(|e| Error::HetznerApi(Box::new(e)))?;
 
         Ok(())
     }
