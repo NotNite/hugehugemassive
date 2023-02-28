@@ -31,7 +31,7 @@ async fn main() {
         .await
         .expect("failed to create server");
 
-    println!("spinned up server, press enter to delete");
+    println!("spun up server, press enter to delete");
     let mut input = String::new();
     std::io::stdin().read_line(&mut input).unwrap();
 
